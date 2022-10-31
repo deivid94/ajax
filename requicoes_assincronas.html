@@ -8,12 +8,47 @@
 		<!-- bootstrap - link cdn -->
 		
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script>
+	
+    <!--Criando requisicoes  com ajax-->
+
+    <!--Requicoes assincronas - status das requicoes.
+
+    0:  request not inicializad (requisicao nao inciiada)
+    1:Server connection established (conexao estabelicida com o servidor)
+    2: request received (conexao recebida)
+    3: processing request (processando requisicao)
+    4: request finished and response is ready (requisicao finalizada)   -->
+  
+  <script>
     function requisitarPagina(url){
+      //incluindo o gif de loading na pagina
+        if (!document.getElementById('loading')){ // se nao pagina nao tiver uma gif cria um.
+        let imgLoading = document.createElement('img')
+        imgLoading.id ='loading'
+        imgLoading.src ='loading.gif'
+        imgLoading.className = 'rounded mx-auto d-block'
+
+        document.getElementById('conteudo').appendChild(imgLoading)
+      }
+
       let ajax = new XMLHttpRequest(); // criando uma requisicao xml ajax
+      //console.log(ajax.readyState)
+
+
       ajax.open('GET',url) // responsavel  por configurar qual url sera requisitada
+      
+      //console.log(ajax)
+      // requisicao nao inciada state 0
+     // console.log(ajax.readyState)
+      ajax.onreadystatechange = ()=>{
+        if (ajax.readyState == 4){
+          document.getElementById('loading').remove()
+          console.log('requicisao finalizada com sucesso')
+        }
+      }
+
+
       ajax.send()
-      console.log(ajax)
     }
   </script>
 
@@ -46,7 +81,7 @@
 	    	<div class="row">
 		    	<div class="col-md-1"></div>
 
-		    	<div class="col-md-10">
+		    	<div class="col-md-10" id="conteudo">
 		    		
 		    	</div>
 		    		
