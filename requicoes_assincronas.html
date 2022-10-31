@@ -21,6 +21,8 @@
   
   <script>
     function requisitarPagina(url){
+      document.getElementById('conteudo').innerHTML = '' //limpando conteudo da div
+
       //incluindo o gif de loading na pagina
         if (!document.getElementById('loading')){ // se nao pagina nao tiver uma gif cria um.
         let imgLoading = document.createElement('img')
@@ -35,15 +37,22 @@
       //console.log(ajax.readyState)
 
 
+
       ajax.open('GET',url) // responsavel  por configurar qual url sera requisitada
       
       //console.log(ajax)
       // requisicao nao inciada state 0
      // console.log(ajax.readyState)
       ajax.onreadystatechange = ()=>{
-        if (ajax.readyState == 4){
+        if (ajax.readyState == 4 && ajax.status == 200){
+          document.getElementById('conteudo').innerHTML = ajax.responseText
           document.getElementById('loading').remove()
-          console.log('requicisao finalizada com sucesso')
+          
+        }
+
+        if (ajax.readyState == 4 && ajax.status == 404){
+          document.getElementById('conteudo').innerHTML = '..tente novamente mais tarde'
+          //document.getElementById('loading').remove
         }
       }
 
