@@ -13,8 +13,8 @@
 <script>
   function getFilmes(){
     let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('GET','http://localhost/ajax/filmes.json')
-    //xmlHttp.open('GET', 'https://deivid94.github.io/ajax/filmes.xml')
+    //xmlHttp.open('GET','http://localhost/ajax/filmes.json')
+    xmlHttp.open('GET', 'https://deivid94.github.io/ajax/filmes.json')
     
     xmlHttp.onreadystatechange = () =>{
       if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
